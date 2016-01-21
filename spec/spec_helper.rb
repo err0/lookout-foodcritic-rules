@@ -7,13 +7,12 @@ def foodcritic_run(rule_name)
   fc = FoodCritic::Linter.new
 
   opts = {
-    :include_rules => [File.join(PROJECT_ROOT, 'lib/foodcritic/rules')],
-    :tags => [rule_name.upcase]
+    include_rules: [File.join(PROJECT_ROOT, 'lib/foodcritic/rules')],
+    tags: [rule_name.upcase],
+    cookbook_paths: File.join(PROJECT_ROOT, 'sample_cookbooks', rule_name.downcase)
   }
 
-  cb_path = File.join(PROJECT_ROOT, 'sample_cookbooks', rule_name.downcase)
-
-  fc.check(cb_path, opts)
+  fc.check(opts)
 end
 
 def warnings(fc_run)
